@@ -4,11 +4,7 @@
 
 #ifndef TEMPLATE_STUDENT_HPP
 #define TEMPLATE_STUDENT_HPP
-#include <string>
-#include <any>
-#include <nlohmann/json.hpp>
-#include "TextTable.h"
-
+#include "header.hpp"
 using nlohmann::json;
 using namespace std;
 struct Student {
@@ -19,5 +15,6 @@ struct Student {
 };
 
 void from_json(const json& j, Student& s);
-void print(Student& student, TextTable& table);
+void print(Student& student);
+void print(string s1, string s2, string s3, string s4);
 #endif  // TEMPLATE_STUDENT_HPP

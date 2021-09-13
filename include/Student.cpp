@@ -1,7 +1,6 @@
 
 
 #include "Student.hpp"
-#include <iostream>
 using namespace std;
 auto get_name(const json& j) -> std::string {
   return j.get<std::string>();
@@ -55,11 +54,20 @@ string toString(std::any& item)
   else  ss << "unknown";
   return ss.str();
 }
-void print(Student& student, TextTable& table)
+void print(string s1, string s2, string s3, string s4)
 {
-    table.add(student.name);
-    table.add(toString(student.group));
-    table.add(toString(student.avg));
-    table.add(toString(student.debt));
-    table.endOfRow();
+  cout << "| " << setw(20) << std::left << s1 << "| "
+       <<  setw(10) << std::left << s2 << "| "
+       <<  setw(10) << std::left << s3 << "| "
+       <<  setw(10) << std::left << s4 << "|\n"
+  << "|---------------------|-----------|-----------|-----------|\n";
+
+}
+void print(Student& student)
+{
+  print(student.name, toString(student.group), toString(student.avg),  toString(student.debt));
+  /*cout << "| " << setw(20) << std::left << student.name << "| "
+       <<  setw(10) << std::left << toString(student.group) << "| "
+       <<  setw(10) << std::left << toString(student.avg) << "| "
+       <<  setw(10) << std::left << toString(student.debt) << "|\n";*/
 }

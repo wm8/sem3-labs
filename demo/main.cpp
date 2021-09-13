@@ -1,26 +1,19 @@
-#include <header.hpp>
 #include "iostream"
 #include <fstream>
-#include "nlohmann/json.hpp"
 #include "Student.hpp"
-#include "TextTable.h"
 using nlohmann::json;
 using namespace std;
 
 void print(vector<Student>& students)
 {
-  TextTable t( '-', '|', '|' );
-
-  t.add( "name" );
-  t.add( "group" );
-  t.add( "avg" );
-  t.add( "debt");
-  t.endOfRow();
+  print( "name", "group", "avg", "debt");/*
+  cout << "| " << setw(20) << std::left << "name" << "| "
+       <<  setw(10) << std::left << "group" << "| "
+       <<  setw(10) << std::left << "avg" << "| "
+       <<  setw(10) << std::left << "debt" << "|\n";*/
   for (Student& student : students) {
-    print(student, t);
+    print(student);
   }
-  t.setAlignment(2, TextTable::Alignment::LEFT);
-  cout<< t;
 }
 int main(int argc, char** argv)
 {
@@ -34,6 +27,8 @@ int main(int argc, char** argv)
   json data;
   jsonFile >> data;
   vector<Student> students;
+  if(!data.at("items").is_array())
+    throw std::runtime_error{"the array must be contained in the file"};
   for (auto const& item : data.at("items"))
   {
     Student student1;
