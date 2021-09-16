@@ -8,6 +8,9 @@
 using nlohmann::json;
 using namespace std;
 struct Student {
+ public:
+  Student();
+  Student(string _name, std::any _group, std::any _avg, std::any debt);
   std::string name;
   std::any group;
   std::any avg;
@@ -15,6 +18,8 @@ struct Student {
 };
 
 void from_json(const json& j, Student& s);
-void print(Student& student);
-void print(string s1, string s2, string s3, string s4);
+void print(Student& student, std::ostream& os);
+void print(string s1, string s2, string s3, string s4, std::ostream& os);
+void print(vector<Student>& students, std::ostream& os);
+vector<Student> parseJSON(json& data);
 #endif  // TEMPLATE_STUDENT_HPP

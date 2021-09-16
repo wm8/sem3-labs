@@ -1,7 +1,20 @@
 
 
 #include "Student.hpp"
+
+#include <iomanip>
+#include <utility>
 using namespace std;
+
+Student::Student(string _name, std::any _group, std::any _avg, std::any _debt) {
+  name = std::move(_name);
+  group = std::move(_group);
+  avg = std::move(_avg);
+  debt = std::move(_debt);
+}
+
+Student::Student() = default;
+
 auto get_name(const json& j) -> std::string {
   return j.get<std::string>();
 }
@@ -54,20 +67,37 @@ string toString(std::any& item)
   else  ss << "unknown";
   return ss.str();
 }
-void print(string s1, string s2, string s3, string s4)
+void print(string s1, string s2, string s3, string s4, std::ostream& os)
 {
-  cout << "| " << setw(20) << std::left << s1 << "| "
+  os << "| " << setw(20) << std::left << s1 << "| "
        <<  setw(10) << std::left << s2 << "| "
        <<  setw(10) << std::left << s3 << "| "
        <<  setw(10) << std::left << s4 << "|\n"
   << "|---------------------|-----------|-----------|-----------|\n";
-
 }
-void print(Student& student)
+void print(Student& student, std::ostream& os)
 {
-  print(student.name, toString(student.group), toString(student.avg),  toString(student.debt));
+  print(student.name, toString(student.group), toString(student.avg),  toString(student.debt), os);
   /*cout << "| " << setw(20) << std::left << student.name << "| "
        <<  setw(10) << std::left << toString(student.group) << "| "
        <<  setw(10) << std::left << toString(student.avg) << "| "
        <<  setw(10) << std::left << toString(student.debt) << "|\n";*/
+}
+void print(vector<Student>& students, std::ostream& os)
+{
+  print( "name", "group", "avg", "debt", os);
+  for (Student& student : students) {
+    print(student, os);
+  }
+}
+vector<Student> parseJSON(json& data)
+{
+  vector<Student> students;
+  for (auto const& item : data.at("items"))
+  {
+    Student student1;
+    from_json(item, student1);
+    students.push_back(student1);
+  }
+  return students;
 }
