@@ -12,6 +12,30 @@ Student::Student(string _name, std::any _group, std::any _avg, std::any _debt) {
   avg = std::move(_avg);
   debt = std::move(_debt);
 }
+bool anyCompare(any a1, any a2)
+{
+  if(a1.type() != a2.type())
+    return false;
+  if(a1.type() == typeid(string))
+    return any_cast<string>(a1)== any_cast<string>(a2);
+  if(a1.type() == typeid(nullptr))
+    return true;
+  if(a1.type() == typeid(double))
+    return any_cast<double>(a1) == any_cast<double>(a2);
+  if(a1.type() == typeid(size_t))
+   return any_cast<size_t>(a1) == any_cast<size_t>(a2);
+  if(a1.type() == typeid(vector<std::string>))
+    return any_cast<vector<std::string>>(a1) == any_cast<vector<std::string>>(a2);
+  return false;
+}
+bool Student::operator==(const Student& student) const
+{
+      bool n =  name == student.name;
+      bool g = anyCompare(group, student.group);
+      bool a = anyCompare(avg, student.avg);
+      bool d = anyCompare(debt, student.debt);
+      return n && g && a && d;
+}
 
 Student::Student() = default;
 

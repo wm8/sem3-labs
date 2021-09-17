@@ -11,6 +11,7 @@ struct Student {
  public:
   Student();
   Student(string _name, std::any _group, std::any _avg, std::any debt);
+  bool operator==(Student const & student) const;
   std::string name;
   std::any group;
   std::any avg;

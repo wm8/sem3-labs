@@ -60,6 +60,7 @@ TEST(printTest, json)
       "| Zhdanov Ivan        | 31        | 2.25      | pyhton    |\n"
       "|---------------------|-----------|-----------|-----------|", ss.str());
 }
+
 TEST(parseTest, jsonParse)
 {
     string jsonData = "{\n"
@@ -87,5 +88,8 @@ TEST(parseTest, jsonParse)
         Student("Gusov Petr", (string)"UI9-11", (string)"4.25", nullptr),
         Student("Zhdanov Ivan", (size_t)31, (double)2.25, (string)"pyhton")
     };
+
+
     ASSERT_EQ(student_inited, students_parsed);
 }
+
