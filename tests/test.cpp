@@ -1,7 +1,7 @@
 // Copyright 2020 Your Name <your_email>
 
 #include <gtest/gtest.h>
-
+#include "header.hpp"
 #include <Student.hpp>
 
 TEST(printTest, StudentsArray) {
@@ -16,16 +16,14 @@ TEST(printTest, StudentsArray) {
         "| test                | test      | 3         | 0         |\n"
         "|---------------------|-----------|-----------|-----------|\n"
         "| test                | 4         | 3.33      | 0         |\n"
-        "|---------------------|-----------|-----------|-----------|",  ss.str());
+        "|---------------------|-----------|-----------|-----------|\n",  ss.str());
 }
 TEST(printTest, StudentItem)
 {
   std::stringstream ss;
   Student s("test", (string)"test", (size_t)3, vector<string>());
   print(s, ss);
-  ASSERT_EQ("| name                | group     | avg       | debt      |\n"
-      "|---------------------|-----------|-----------|-----------|\n"
-      "| test                | test      | 3         | 0         |\n"
+  ASSERT_EQ("| test                | test      | 3         | 0         |\n"
       "|---------------------|-----------|-----------|-----------|\n",  ss.str());
 }
 TEST(printTest, json)
@@ -58,7 +56,7 @@ TEST(printTest, json)
       "| Gusov Petr          | UI9-11    | 4.25      | null      |\n"
       "|---------------------|-----------|-----------|-----------|\n"
       "| Zhdanov Ivan        | 31        | 2.25      | pyhton    |\n"
-      "|---------------------|-----------|-----------|-----------|", ss.str());
+      "|---------------------|-----------|-----------|-----------|\n", ss.str());
 }
 
 TEST(parseTest, jsonParse)
@@ -88,8 +86,36 @@ TEST(parseTest, jsonParse)
         Student("Gusov Petr", (string)"UI9-11", (string)"4.25", nullptr),
         Student("Zhdanov Ivan", (size_t)31, (double)2.25, (string)"pyhton")
     };
-
-
     ASSERT_EQ(student_inited, students_parsed);
+}
+TEST(parseTest, fromFile)
+{
+  string jsonData = "{\n"
+      "  \"items\": [\n"
+      "    {\n"
+      "      \"name\": \"Gusov Petr\",\n"
+      "      \"group\": \"1\",\n"
+      "      \"avg\": \"4.25\",\n"
+      "      \"debt\":  [\n"
+      "        \"C++\",\n"
+      "        \"Linux\",\n"
+      "        \"Network\"\n"
+      "      ]\n"
+      "    },\n"
+      "    {\n"
+      "      \"name\": \"Zdhanov Ivan\",\n"
+      "      \"group\": 31,\n"
+      "      \"avg\": 2.25,\n"
+      "      \"debt\": \"python\"\n"
+      "    }\n"
+      "  ],\n"
+      "  \"_meta\": {\n"
+      "    \"count\": 2\n"
+      "  }\n"
+      "}";
+  nlohmann::json json1 = json::parse(jsonData);
+  char* argv[] ={(char*)"", (char*)"../jsonExamples/example1.json"};
+  nlohmann::json json2 = getJSON(2, argv);
+  ASSERT_EQ(json1, json2);
 }
 
