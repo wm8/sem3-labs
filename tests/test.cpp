@@ -116,6 +116,33 @@ TEST(parseTest, fromFile)
   nlohmann::json json1 = json::parse(jsonData);
   char* argv[] ={(char*)"", (char*)"../jsonExamples/example1.json"};
   nlohmann::json json2 = getJSON(2, argv);
-  ASSERT_EQ(json1, json2);
+  ASSERT_EQ(json1, json2) << "Test passed!";
 }
-
+TEST(errorCheck, lessArgsTest)
+{
+  try {
+    char* argv[] ={(char*)"", (char*)"../jsonExamples/example1.json"};
+    nlohmann::json json2 = getJSON(1, argv);
+    FAIL() << "Expected: The file path was not passed";
+  }
+  catch(std::runtime_error const & err) {
+    EXPECT_EQ(err.what(),std::string("The file path was not passed"));
+  }
+  catch(...) {
+    FAIL() << "Expected The file path was not passed";
+  }
+}
+TEST(errorCheck, _metaCheck)
+{
+  try {
+    char* argv[] ={(char*)"", (char*)"../jsonExamples/example2.json"};
+    nlohmann::json json2 = getJSON(2, argv);
+    FAIL() << "Expected: _meta value does not match the array size";
+  }
+  catch(std::runtime_error const & err) {
+    EXPECT_EQ(err.what(),std::string("_meta value does not match the array size"));
+  }
+  catch(...) {
+    FAIL() << "Expected _meta value does not match the array size";
+  }
+}
