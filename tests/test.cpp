@@ -143,6 +143,6 @@ TEST(errorCheck, _metaCheck)
     EXPECT_EQ(err.what(),std::string("_meta value does not match the array size"));
   }
   catch(...) {
-    FAIL() << "Expected _meta value does not match the array size";
+    FAIL() << "Expected: _meta value does not match the array size";
   }
 }
