@@ -3,14 +3,12 @@
 #include <gtest/gtest.h>
 #include "header.hpp"
 #include <Student.hpp>
-
 TEST(printTest, StudentsArray) {
     std::stringstream ss;
     std::vector<Student> students;
     students.emplace_back("test", (string)"test", (size_t)3, vector<string>());
     students.emplace_back("test", (size_t)4, (double)3.33, vector<string>());
     print(students, ss);
-
     ASSERT_EQ("| name                | group     | avg       | debt      |\n"
         "|---------------------|-----------|-----------|-----------|\n"
         "| test                | test      | 3         | 0         |\n"
