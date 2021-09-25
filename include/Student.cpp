@@ -77,7 +77,7 @@ void from_json(const json& j, Student& s) {
 std::string toString(std::any& item)
 {
   std::stringstream ss;
-  if (item.type() == typeid(nullptr_t))
+  if (item.type() == typeid(std::nullptr_t))
       ss << "null";
   else if (item.type() == typeid(std::string))
     ss << std::any_cast<std::string>(item);
