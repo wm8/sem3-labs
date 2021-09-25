@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2021 wm8
 
 #include <gtest/gtest.h>
 #include "header.hpp"
@@ -6,8 +6,10 @@
 TEST(printTest, StudentsArray) {
     std::stringstream ss;
     std::vector<Student> students;
-    students.emplace_back("test", (string)"test", (size_t)3, vector<string>());
-    students.emplace_back("test", (size_t)4, (double)3.33, vector<string>());
+    students.emplace_back("test", (std::string)"test",
+                          (size_t)3, std::vector<std::string>());
+    students.emplace_back("test", (size_t)4,
+                          (double)3.33, std::vector<std::string>());
     print(students, ss);
     ASSERT_EQ("| name                | group     | avg       | debt      |\n"
         "|---------------------|-----------|-----------|-----------|\n"
@@ -19,14 +21,14 @@ TEST(printTest, StudentsArray) {
 TEST(printTest, StudentItem)
 {
   std::stringstream ss;
-  Student s("test", (string)"test", (size_t)3, vector<string>());
+  Student s("test", (std::string)"test", (size_t)3, std::vector<std::string>());
   print(s, ss);
   ASSERT_EQ("| test                | test      | 3         | 0         |\n"
       "|---------------------|-----------|-----------|-----------|\n",  ss.str());
 }
 TEST(printTest, json)
 {
-  string jsonData = "{\n"
+  std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
       "      \"name\": \"Gusov Petr\",\n"
@@ -46,7 +48,7 @@ TEST(printTest, json)
       "  }\n"
       "}";
   nlohmann::json _json = json::parse(jsonData);
-  vector<Student> students_parsed = parseJSON(_json);
+  std::vector<Student> students_parsed = parseJSON(_json);
   std::stringstream ss;
   print(students_parsed, ss);
   ASSERT_EQ("| name                | group     | avg       | debt      |\n"
@@ -59,7 +61,7 @@ TEST(printTest, json)
 
 TEST(parseTest, jsonParse)
 {
-    string jsonData = "{\n"
+  std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
       "      \"name\": \"Gusov Petr\",\n"
@@ -79,16 +81,18 @@ TEST(parseTest, jsonParse)
       "  }\n"
       "}";
     nlohmann::json _json = json::parse(jsonData);;
-    vector<Student> students_parsed = parseJSON(_json);
-    vector<Student> student_inited = {
-        Student("Gusov Petr", (string)"UI9-11", (string)"4.25", nullptr),
-        Student("Zhdanov Ivan", (size_t)31, (double)2.25, (string)"pyhton")
+    std::vector<Student> students_parsed = parseJSON(_json);
+    std::vector<Student> student_inited = {
+        Student("Gusov Petr", (std::string)"UI9-11",
+                (std::string)"4.25", nullptr),
+        Student("Zhdanov Ivan", (size_t)31,
+                (double)2.25, (std::string)"pyhton")
     };
     ASSERT_EQ(student_inited, students_parsed);
 }
 TEST(parseTest, fromFile)
 {
-  string jsonData = "{\n"
+  std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
       "      \"name\": \"Gusov Petr\",\n"

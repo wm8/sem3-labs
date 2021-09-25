@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name
+// Copyright 2021 wm8
 
 #ifndef INCLUDE_HEADER_HPP_
 #define INCLUDE_HEADER_HPP_
@@ -9,7 +9,6 @@
 #include <fstream>
 
 using nlohmann::json;
-using namespace std;
 
 json getJSON(int argc, char** argv);
 #endif // INCLUDE_HEADER_HPP_

@@ -1,10 +1,10 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2021 wm8
 
 #include <header.hpp>
 json getJSON(int argc, char** argv) {
   if (argc < 2) throw std::runtime_error{"The file path was not passed"};
-  string filePath(argv[1]);
-  ifstream jsonFile(filePath);
+  std::string filePath(argv[1]);
+  std::ifstream jsonFile(filePath);
   if (!jsonFile) throw std::runtime_error{"unable to open json: " + filePath};
   json data;
   jsonFile >> data;

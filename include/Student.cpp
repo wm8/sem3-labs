@@ -1,28 +1,30 @@
+// Copyright 2021 wm8
 #include "Student.hpp"
 #include <iomanip>
 #include <utility>
-using namespace std;
 
-Student::Student(string _name, std::any _group, std::any _avg, std::any _debt) {
+Student::Student(std::string _name, std::any _group, std::any _avg, std::any _debt) {
   name = std::move(_name);
   group = std::move(_group);
   avg = std::move(_avg);
   debt = std::move(_debt);
 }
-bool anyCompare(any a1, any a2)
+bool anyCompare(std::any a1, std::any a2)
 {
-  if(a1.type() != a2.type())
+  if( a1.type() != a2.type())
     return false;
-  if(a1.type() == typeid(string))
-    return any_cast<string>(a1)== any_cast<string>(a2);
-  if(a1.type() == typeid(nullptr))
+  if( a1.type() == typeid(std::string))
+    return std::any_cast<std::string>(a1)== std::any_cast<std::string>(a2);
+  if( a1.type() == typeid(nullptr))
     return true;
-  if(a1.type() == typeid(double))
-    return any_cast<double>(a1) == any_cast<double>(a2);
-  if(a1.type() == typeid(size_t))
-   return any_cast<size_t>(a1) == any_cast<size_t>(a2);
-  if(a1.type() == typeid(vector<std::string>))
-    return any_cast<vector<std::string>>(a1) == any_cast<vector<std::string>>(a2);
+  if( a1.type() == typeid(double))
+    return std::any_cast<double>(a1) == std::any_cast<double>(a2);
+  if( a1.type() == typeid(size_t))
+   return std::any_cast<size_t>(a1) == std::any_cast<size_t>(a2);
+  if( a1.type() == typeid(std::vector<std::string>))
+    return
+        std::any_cast<std::vector<std::string>>(a1)
+           == std::any_cast<std::vector<std::string>>(a2);
   return false;
 }
 bool Student::operator==(const Student& student) const
@@ -72,48 +74,48 @@ void from_json(const json& j, Student& s) {
     s.avg = get_avg(j.at("avg"));
     s.debt = get_debt(j.at("debt"));
 }
-string toString(std::any& item)
+std::string toString(std::any& item)
 {
-  stringstream ss;
-  if(item.type() == typeid(nullptr_t))
+  std::stringstream ss;
+  if( item.type() == typeid(nullptr_t))
       ss << "null";
-  else if(item.type() == typeid(string))
-    ss << any_cast<string>(item);
-  else if(item.type() == typeid(double))
-    ss << any_cast<double>(item);
-  else if(item.type() == typeid(vector<std::string>))
-    ss << any_cast<std::vector<std::string> >(item).size();
-  else if(item.type() == typeid(size_t))
-    ss << any_cast<size_t>(item);
+  else if( item.type() == typeid(std::string))
+    ss << std::any_cast<std::string>(item);
+  else if( item.type() == typeid(double))
+    ss << std::any_cast<double>(item);
+  else if( item.type() == typeid(std::vector<std::string>))
+    ss << std::any_cast<std::vector<std::string> >(item).size();
+  else if( item.type() == typeid(size_t))
+    ss << std::any_cast<size_t>(item);
   else  ss << "unknown";
   return ss.str();
 }
-void print(string s1, string s2, string s3, string s4, std::ostream& os)
+void print(std::string s1, std::string s2,
+           std::string s3, std::string s4, std::ostream& os)
 {
-  os << "| " << setw(20) << std::left << s1 << "| "
-       <<  setw(10) << std::left << s2 << "| "
-       <<  setw(10) << std::left << s3 << "| "
-       <<  setw(10) << std::left << s4 << "|\n"
+  os << "| " << std::setw(20) << std::left << s1 << "| "
+       <<  std::setw(10) << std::left << s2 << "| "
+       <<  std::setw(10) << std::left << s3 << "| "
+       <<  std::setw(10) << std::left << s4 << "|\n"
   << "|---------------------|-----------|-----------|-----------|\n";
 }
 void print(Student& student, std::ostream& os)
 {
-  print(student.name, toString(student.group), toString(student.avg),  toString(student.debt), os);
-  /*cout << "| " << setw(20) << std::left << student.name << "| "
-       <<  setw(10) << std::left << toString(student.group) << "| "
-       <<  setw(10) << std::left << toString(student.avg) << "| "
-       <<  setw(10) << std::left << toString(student.debt) << "|\n";*/
+  print(student.name,
+        toString(student.group),
+        toString(student.avg),
+        toString(student.debt), os);
 }
-void print(vector<Student>& students, std::ostream& os)
+void print(std::vector<Student>& students, std::ostream& os)
 {
   print( "name", "group", "avg", "debt", os);
   for (Student& student : students) {
     print(student, os);
   }
 }
-vector<Student> parseJSON(json& data)
+std::vector<Student> parseJSON(json& data)
 {
-  vector<Student> students;
+  std::vector<Student> students;
   for (auto const& item : data.at("items"))
   {
     Student student1;

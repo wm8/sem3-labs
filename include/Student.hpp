@@ -1,16 +1,17 @@
-//
+// Copyright 2021 wm8
 // Created by Алекс on 10.09.2021.
 //
 
-#ifndef TEMPLATE_STUDENT_HPP
-#define TEMPLATE_STUDENT_HPP
+#ifndef TEMPLATE_STUDENT_HPP_
+#define TEMPLATE_STUDENT_HPP_
 #include "header.hpp"
+#include <vector>
+#include <string>
 using nlohmann::json;
-using namespace std;
 struct Student {
  public:
   Student();
-  Student(string _name, std::any _group, std::any _avg, std::any debt);
+  Student(std::string _name, std::any _group, std::any _avg, std::any debt);
   bool operator==(Student const & student) const;
   std::string name;
   std::any group;
@@ -20,7 +21,7 @@ struct Student {
 
 void from_json(const json& j, Student& s);
 void print(Student& student, std::ostream& os);
-void print(string s1, string s2, string s3, string s4, std::ostream& os);
-void print(vector<Student>& students, std::ostream& os);
-vector<Student> parseJSON(json& data);
-#endif  // TEMPLATE_STUDENT_HPP
+void print(std::string s1, std::string s2, std::string s3, std::string s4, std::ostream& os);
+void print(std::vector<Student>& students, std::ostream& os);
+std::vector<Student> parseJSON(json& data);
+#endif  // TEMPLATE_STUDENT_HPP_
