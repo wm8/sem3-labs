@@ -63,7 +63,6 @@ auto get_avg(const json& j) -> std::any {
 }
 
 auto get_group(const json& j) -> std::any {
-
   if (j.is_string())
     return j.get<std::string>();
   else
