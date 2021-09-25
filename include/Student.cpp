@@ -3,7 +3,8 @@
 #include <iomanip>
 #include <utility>
 
-Student::Student(std::string _name, std::any _group, std::any _avg, std::any _debt) {
+Student::Student(std::string _name, std::any _group,
+                 std::any _avg, std::any _debt) {
   name = std::move(_name);
   group = std::move(_group);
   avg = std::move(_avg);
@@ -11,17 +12,17 @@ Student::Student(std::string _name, std::any _group, std::any _avg, std::any _de
 }
 bool anyCompare(std::any a1, std::any a2)
 {
-  if( a1.type() != a2.type())
+  if (a1.type() != a2.type())
     return false;
-  if( a1.type() == typeid(std::string))
+  if (a1.type() == typeid(std::string))
     return std::any_cast<std::string>(a1)== std::any_cast<std::string>(a2);
-  if( a1.type() == typeid(nullptr))
+  if (a1.type() == typeid(nullptr))
     return true;
-  if( a1.type() == typeid(double))
+  if (a1.type() == typeid(double))
     return std::any_cast<double>(a1) == std::any_cast<double>(a2);
-  if( a1.type() == typeid(size_t))
+  if (a1.type() == typeid(size_t))
    return std::any_cast<size_t>(a1) == std::any_cast<size_t>(a2);
-  if( a1.type() == typeid(std::vector<std::string>))
+  if (a1.type() == typeid(std::vector<std::string>))
     return
         std::any_cast<std::vector<std::string>>(a1)
            == std::any_cast<std::vector<std::string>>(a2);
@@ -77,15 +78,15 @@ void from_json(const json& j, Student& s) {
 std::string toString(std::any& item)
 {
   std::stringstream ss;
-  if( item.type() == typeid(nullptr_t))
+  if (item.type() == typeid(nullptr_t))
       ss << "null";
-  else if( item.type() == typeid(std::string))
+  else if (item.type() == typeid(std::string))
     ss << std::any_cast<std::string>(item);
-  else if( item.type() == typeid(double))
+  else if (item.type() == typeid(double))
     ss << std::any_cast<double>(item);
-  else if( item.type() == typeid(std::vector<std::string>))
+  else if (item.type() == typeid(std::vector<std::string>))
     ss << std::any_cast<std::vector<std::string> >(item).size();
-  else if( item.type() == typeid(size_t))
+  else if (item.type() == typeid(size_t))
     ss << std::any_cast<size_t>(item);
   else  ss << "unknown";
   return ss.str();
@@ -108,7 +109,7 @@ void print(Student& student, std::ostream& os)
 }
 void print(std::vector<Student>& students, std::ostream& os)
 {
-  print( "name", "group", "avg", "debt", os);
+  print("name", "group", "avg", "debt", os);
   for (Student& student : students) {
     print(student, os);
   }

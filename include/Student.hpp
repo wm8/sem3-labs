@@ -2,8 +2,8 @@
 // Created by Алекс on 10.09.2021.
 //
 
-#ifndef TEMPLATE_STUDENT_HPP_
-#define TEMPLATE_STUDENT_HPP_
+#ifndef INCLUDE_STUDENT_HPP_
+#define INCLUDE_STUDENT_HPP_
 #include "header.hpp"
 #include <vector>
 #include <string>
@@ -21,7 +21,8 @@ struct Student {
 
 void from_json(const json& j, Student& s);
 void print(Student& student, std::ostream& os);
-void print(std::string s1, std::string s2, std::string s3, std::string s4, std::ostream& os);
+void print(std::string s1, std::string s2,
+           std::string s3, std::string s4, std::ostream& os);
 void print(std::vector<Student>& students, std::ostream& os);
 std::vector<Student> parseJSON(json& data);
-#endif  // TEMPLATE_STUDENT_HPP_
+#endif  // INCLUDE_STUDENT_HPP_
