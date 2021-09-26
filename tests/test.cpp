@@ -1,8 +1,15 @@
 // Copyright 2021 wm8
+#ifndef INCLUDE_TEST_CPP_
+#define INCLUDE_TEST_CPP_
 
 #include <gtest/gtest.h>
 #include "header.hpp"
 #include <Student.hpp>
+#ifdef _JSON_DIR
+#define JSON_DIR _JSON_DIR
+#else
+#define JSON_DIR "nobody"
+#endif
 TEST(printTest, StudentsArray) {
     std::stringstream ss;
     std::vector<Student> students;
@@ -80,7 +87,7 @@ TEST(parseTest, jsonParse)
       "    \"count\": 2\n"
       "  }\n"
       "}";
-    nlohmann::json _json = json::parse(jsonData);;
+    nlohmann::json _json = json::parse(jsonData);
     std::vector<Student> students_parsed = parseJSON(_json);
     std::vector<Student> student_inited = {
         Student("Gusov Petr", (std::string)"UI9-11",
@@ -116,14 +123,18 @@ TEST(parseTest, fromFile)
       "  }\n"
       "}";
   nlohmann::json json1 = json::parse(jsonData);
-  char* argv[] ={(char*)"", (char*)"../jsonExamples/example1.json"};
+  std::string path = JSON_DIR;
+  path+="/example1.json";
+  char* argv[] ={(char*)"", (char*)(path.c_str())};
   nlohmann::json json2 = getJSON(2, argv);
   ASSERT_EQ(json1, json2) << "Test passed!";
 }
 TEST(errorCheck, lessArgsTest)
 {
   try {
-    char* argv[] ={(char*)"", (char*)"../jsonExamples/example1.json"};
+    std::string path = JSON_DIR;
+    path+="/example1.json";
+    char* argv[] ={(char*)"", (char*)(path.c_str())};
     nlohmann::json json2 = getJSON(1, argv);
     FAIL() << "Expected: The file path was not passed";
   }
@@ -137,7 +148,9 @@ TEST(errorCheck, lessArgsTest)
 TEST(errorCheck, _metaCheck)
 {
   try {
-    char* argv[] ={(char*)"", (char*)"../jsonExamples/example2.json"};
+    std::string path = JSON_DIR;
+    path+="/example2.json";
+    char* argv[] ={(char*)"", (char*)(path.c_str())};
     nlohmann::json json2 = getJSON(2, argv);
     FAIL() << "Expected: _meta value does not match the array size";
   }
@@ -148,3 +161,4 @@ TEST(errorCheck, _metaCheck)
     FAIL() << "Expected: _meta value does not match the array size";
   }
 }
+#endif // INCLUDE_TEST_CPP_
