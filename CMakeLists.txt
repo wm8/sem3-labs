@@ -50,6 +50,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(demo ${PROJECT_NAME})
 
 if(BUILD_TESTS)
+  include_directories(${CMAKE_SOURCE_DIR}/jsonExamples)
+
   add_executable(tests
     # TODO: enum your files and delete this comment
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
