@@ -48,7 +48,6 @@ double Experiment::run() {
         break;
   }
   auto t2 = std::chrono::high_resolution_clock::now();
-  auto ms_int = duration_cast<milliseconds>(t2 - t1);
   duration<double, std::milli> ms = t2 - t1;
   time = ms.count();
   return time;
