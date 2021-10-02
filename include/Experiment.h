@@ -11,13 +11,13 @@ class Experiment
 {
  public:
     int id;
-    long long size;
+    int64_t size;
     int time;
     ExperimentType type;
-    Experiment(int id, ExperimentType type, long long size);
+    Experiment(int id, ExperimentType type, int64_t size);
     char* initArray();
     double run();
-    void forward(char* arr, char& k);
+    void _forward(char* arr, char& k);
     void reverse(char* arr, char& k);
     void random(char* arr, char& k);
     void print(std::ostream& os);

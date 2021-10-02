@@ -5,13 +5,13 @@
 std::ostream & operator<<(std::ostream & os, ExperimentType const & type) {
   switch (type) {
     case forward:
-      os << "forward";
+      os << "_forward";
       break;
     case reverse:
-      os << "forward";
+      os << "_forward";
       break;
-    case random:
-      os << "forward";
+    case _random:
+      os << "_forward";
       break;
   }
   return os;
@@ -21,13 +21,13 @@ std::string to_string(ExperimentType type)
   std::stringstream ss;
   switch (type) {
     case forward:
-      ss << "forward";
+      ss << "_forward";
       break;
     case reverse:
-      ss << "forward";
+      ss << "_forward";
       break;
-    case random:
-      ss << "forward";
+    case _random:
+      ss << "_forward";
       break;
   }
   return ss.str();

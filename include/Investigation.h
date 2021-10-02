@@ -11,7 +11,7 @@ using std::vector;
 struct Investigation {
   ExperimentType type;
   std::vector<Experiment> experiments;
-  Investigation(ExperimentType type, std::vector<long long>& sizes);
+  Investigation(ExperimentType type, std::vector<int64_t>& sizes);
 
  public:
  void print(std::ostream& os);

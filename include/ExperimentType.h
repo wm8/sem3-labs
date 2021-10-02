@@ -5,9 +5,6 @@
 enum ExperimentType
 {
   forward,
-  reverse,
-  random
-
-};
+  reverse, _random };
 std::string to_string(ExperimentType type);
 #endif  // TEMPLATE_EXPERIMENTTYPE_H

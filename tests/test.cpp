@@ -8,7 +8,7 @@ TEST(ExperimentTest, forwardTest) {
     Experiment e(0, forward, 80);
     char* arr = e.initArray();
     char k;
-    e.forward(arr, k);
+    e._forward(arr, k);
     SUCCEED();
   }
   catch (std::runtime_error const & e)
@@ -45,7 +45,7 @@ TEST(ExperimentTest, randomTest) {
 TEST(ExperimentTest, runTest)
 {
   try {
-    Experiment e(0, random, 838860);
+    Experiment e(0, _random, 838860);
     int result = e.run();
     if(result >= 0)
       SUCCEED() << result;
@@ -58,7 +58,7 @@ TEST(ExperimentTest, runTest)
 }
 TEST(ExperimentTest, printTest)
 {
-  Experiment e(0, random, 838860);
+  Experiment e(0, _random, 838860);
   e.run();
   std::stringstream ss;
   e.print(ss);
@@ -73,8 +73,8 @@ TEST(ExperimentTest, printTest)
 }
 TEST(InvestigationTest, constructorTest) {
   try {
-    std::vector<long long> size = {838860, 1677721, 3355443};
-    Investigation i(random, size);
+    std::vector<int64_t> size = {838860, 1677721, 3355443};
+    Investigation i(_random, size);
     SUCCEED();
   }
   catch (std::runtime_error const & e)
