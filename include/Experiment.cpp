@@ -40,11 +40,11 @@ double Experiment::run() {
         break;
       case ::reverse:
         for (int j = 0; j < 1000; j++)
-          reverse(arr,k);
+          reverse(arr, k);
         break;
       case ::_random:
         for (int j = 0; j < 1000; j++)
-          random(arr,k);
+          random(arr, k);
         break;
   }
   auto t2 = std::chrono::high_resolution_clock::now();
