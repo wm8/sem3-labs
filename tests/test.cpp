@@ -9,6 +9,7 @@ TEST(ExperimentTest, forwardTest) {
     char* arr = e.initArray();
     char k;
     e._forward(arr, k);
+    delete[] arr;
     SUCCEED();
   }
   catch (std::runtime_error const & e)
@@ -22,6 +23,7 @@ TEST(ExperimentTest, reverseTest) {
     char* arr = e.initArray();
     char k=0;
     e.reverse(arr, k);
+    delete[] arr;
     SUCCEED();
   }
   catch (std::runtime_error const & e)
@@ -35,6 +37,7 @@ TEST(ExperimentTest, randomTest) {
     char* arr = e.initArray();
     char k;
     e.random(arr, k);
+    delete[] arr;
     SUCCEED();
   }
   catch (std::runtime_error const & e)

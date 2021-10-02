@@ -50,6 +50,7 @@ double Experiment::run() {
   auto t2 = std::chrono::high_resolution_clock::now();
   duration<double, std::milli> ms = t2 - t1;
   time = ms.count();
+  delete[] arr;
   return time;
 }
 void Experiment::reverse(char* arr, char& k) {
