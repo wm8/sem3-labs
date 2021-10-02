@@ -102,7 +102,7 @@ cache_size['1'] = 2 mb;
 cache_size['2'] = 4 mb;
 cache_size['3'] = 8 mb;
 
-// 1mb < 2mb < 4mb < 8mb < 12mb
+// 1mb < 2mb < 4mb < 8mb
 ```
 
 ### Эксперимент

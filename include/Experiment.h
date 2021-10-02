@@ -1,37 +1,26 @@
-//
-// Created by Алекс on 28.09.2021.
-//
+// Copyright 2021 wm8
 
 #ifndef TEMPLATE_EXPERIMENT_H
 #define TEMPLATE_EXPERIMENT_H
 #include <chrono>
 #include <ostream>
-
-using std::chrono::high_resolution_clock;
-using std::chrono::duration_cast;
-using std::chrono::duration;
-using std::chrono::milliseconds;
-enum ExperimentType
-{
-  forward,
-  reverse,
-  random
-};
-
+#include <sstream>
+#include "ExperimentType.h"
+#include "header.hpp"
 class Experiment
 {
-  int id;
-  int size;
-  int time;
-  ExperimentType type;
-
  public:
-  Experiment(int id, int size);
-  char* initArray();
-  double run();
-  void forward(char* arr, char& k);
-  void reverse(char* arr, char& k);
-  void random(char* arr, char& k);
+    int id;
+    long long size;
+    int time;
+    ExperimentType type;
+    Experiment(int id, ExperimentType type, long long size);
+    char* initArray();
+    double run();
+    void forward(char* arr, char& k);
+    void reverse(char* arr, char& k);
+    void random(char* arr, char& k);
+    void print(std::ostream& os);
 };
 
 #endif  // TEMPLATE_EXPERIMENT_H

@@ -1,6 +1,4 @@
-//
-// Created by Алекс on 28.09.2021.
-//
+// Copyright 2021 wm8
 
 #ifndef TEMPLATE_INVESTIGATION_H
 #define TEMPLATE_INVESTIGATION_H
@@ -11,11 +9,12 @@
 using std::string;
 using std::vector;
 struct Investigation {
-  std::string type;
+  ExperimentType type;
   std::vector<Experiment> experiments;
+  Investigation(ExperimentType type, std::vector<long long>& sizes);
 
  public:
- std::string toString();
+ void print(std::ostream& os);
 };
 
 #endif  // TEMPLATE_INVESTIGATION_H
