@@ -13,13 +13,14 @@ class Experiment
     int id;
     int64_t size;
     int time;
+    char* arr;
     ExperimentType type;
     Experiment(int id, ExperimentType type, int64_t size);
-    char* initArray();
+    ~Experiment();
     double run();
-    void _forward(char* arr, char& k);
-    void reverse(char* arr, char& k);
-    void random(char* arr, char& k);
+    void _forward(char& k) const;
+    void reverse(char& k) const;
+    void random(char& k) const;
     void print(std::ostream& os);
 };
 

@@ -10,7 +10,7 @@ using std::string;
 using std::vector;
 struct Investigation {
   ExperimentType type;
-  std::vector<Experiment> experiments;
+  std::vector<Experiment*> experiments;
   Investigation(ExperimentType type, std::vector<int64_t>& sizes);
 
  public:

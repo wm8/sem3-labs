@@ -6,10 +6,8 @@
 TEST(ExperimentTest, forwardTest) {
   try {
     Experiment e(0, forward, 80);
-    char* arr = e.initArray();
     char k;
-    e._forward(arr, k);
-    delete[] arr;
+    e._forward(k);
     SUCCEED();
   }
   catch (std::runtime_error const & e)
@@ -20,10 +18,8 @@ TEST(ExperimentTest, forwardTest) {
 TEST(ExperimentTest, reverseTest) {
   try {
     Experiment e(0,forward, 80);
-    char* arr = e.initArray();
     char k=0;
-    e.reverse(arr, k);
-    delete[] arr;
+    e.reverse(k);
     SUCCEED();
   }
   catch (std::runtime_error const & e)
@@ -34,10 +30,8 @@ TEST(ExperimentTest, reverseTest) {
 TEST(ExperimentTest, randomTest) {
   try {
     Experiment e(0, forward,  80);
-    char* arr = e.initArray();
     char k;
-    e.random(arr, k);
-    delete[] arr;
+    e.random(k);
     SUCCEED();
   }
   catch (std::runtime_error const & e)
@@ -73,15 +67,4 @@ TEST(ExperimentTest, printTest)
       "\t\t\tduration: "+ std::to_string(e.time) +" ms\n");
   std::string s2 = ss.str();
   ASSERT_EQ(s2, s);
-}
-TEST(InvestigationTest, constructorTest) {
-  try {
-    std::vector<int64_t> size = {838860, 1677721, 3355443};
-    Investigation i(_random, size);
-    SUCCEED();
-  }
-  catch (std::runtime_error const & e)
-  {
-    FAIL() << e.what();
-  }
 }
