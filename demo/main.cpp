@@ -1,5 +1,7 @@
-#include <example.hpp>
+#include <tests.hpp>
 
+#include "SharedPtr.h"
 int main() {
+
   example();
 }
