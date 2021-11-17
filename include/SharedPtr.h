@@ -1,6 +1,4 @@
-//
-// Created by Алекс on 16.11.2021.
-//
+// Copyright 2021 wm8
 
 #ifndef TEMPLATE_SHAREDPTR_H
 #define TEMPLATE_SHAREDPTR_H
@@ -69,13 +67,15 @@ SharedPtr<T>::~SharedPtr() {
   counter = nullptr;
 }
 template <typename T>
-auto SharedPtr<T>::operator=(const SharedPtr& r) -> SharedPtr& {
+auto SharedPtr<T>::operator=(const SharedPtr& r)
+    -> SharedPtr& {
   item = r.item;
   counter = r.counter;
   return item;
 }
 template <typename T>
-auto SharedPtr<T>::operator=(SharedPtr&& r) -> SharedPtr& {
+auto SharedPtr<T>::operator=(SharedPtr&& r)
+    -> SharedPtr& {
   item = r.item;
   counter = r.counter;
   return item;

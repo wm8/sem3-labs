@@ -1,5 +1,3 @@
-//
-// Created by Алекс on 16.11.2021.
-//
+// Copyright 2021 wm8
 #include "ISPCtrlBlock.h"
 vector<ISPCtrlBlock*> ISPCtrlBlock::links;
