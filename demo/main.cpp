@@ -1,5 +1,6 @@
 // Copyright 2021 wm8
-
-#include "SharedPtr.h"
-int main() {
+#include <iostream>
+int main()
+{
+  std::cout << "Hello, build" <<std::endl;
 }
