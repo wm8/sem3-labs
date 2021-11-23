@@ -3,7 +3,7 @@
 #include <iostream>
 #include <map>
 #include <utils.hpp>
-
+#include <sstream>
 #include "boost/regex.hpp"
 using boost::regex;
 using std::stringstream;
