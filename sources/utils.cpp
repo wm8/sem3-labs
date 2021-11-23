@@ -14,14 +14,14 @@ std::vector<string> split(string& s, char separator)
   std::vector<string> seglist;
   string segment;
   stringstream ss(s);
-  while(std::getline(ss, segment, separator))
+  while (std::getline(ss, segment, separator))
     seglist.push_back(segment);
   return seglist;
 }
 string printDirectory(path dirPath, std::ostream& os)
 {
-  const boost::regex reg( "balance_[0-9]{8}_[0-9]{8}.txt" );
-  std::map<string , std::pair<long, long>> blc;
+  const boost::regex reg("balance_[0-9]{8}_[0-9]{8}.txt");
+  std::map<string , std::pair<int, int>> blc;
 
   for (const directory_entry& i : directory_iterator{dirPath})
   {
@@ -30,7 +30,7 @@ string printDirectory(path dirPath, std::ostream& os)
     boost::smatch what;
     string filename = i.path().filename().string();
 
-    if (!boost::regex_match( filename, what, reg ))
+    if (!boost::regex_match( filename, what, reg))
       continue;
     os << dirPath.filename().string()
        << " " << filename << std::endl;
@@ -42,21 +42,22 @@ string printDirectory(path dirPath, std::ostream& os)
     string content(size, '\0');
     file.read(content.data(), size);
     auto parts = split(content, '|');
-    long date = std::stol( parts[2]);
+    int date = std::stoi(parts[2]);
     std::string bal_id = parts[1];
 
-    if(blc.find(bal_id) == blc.end())
+    if (blc.find(bal_id) == blc.end())
       blc[bal_id] = {1, date};
     else
     {
       blc[bal_id].first++;
-      if(blc[bal_id].second < date)
+      if (blc[bal_id].second < date)
         blc[bal_id].second = date;
     }
     file.close();
   }
   stringstream ss;
-  for ( const auto &[bid, data]: blc ) {
+  for ( const auto &[bid, data] : blc )
+  {
     ss << "broker:" << dirPath.filename().string()
        << " account:" << bid << " files:" << data.first
        << " lastdate:" << data.second << std::endl;
