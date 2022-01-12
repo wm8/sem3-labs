@@ -1,5 +1,4 @@
-// Copyright 2021 Your Name <your_email>
-
+// Copyright (c) 2022 wm8
 #include <stdexcept>
 
 #include <example.hpp>
