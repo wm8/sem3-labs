@@ -6,7 +6,7 @@ void Terminate(int exit_code)
   Program::instance()->SaveData();
 
   BOOST_LOG_TRIVIAL(info) << "exit code: " << exit_code;
-  Program::instance()->terminated= true;
+  Program::instance()->terminated = true;
   BOOST_LOG_TRIVIAL(info) << "terminated: "
                           <<  Program::instance()->terminated;
   delete Program::instance();
@@ -16,8 +16,7 @@ int ParseArgs(Program* _p, int argc, char **argv)
   po::options_description desc("Allowed options");
   desc.add_options()
       ("M", po::value<unsigned int>(), "кол-во потоков")
-          ("f", po::value<std::string>(), "имя файла")
-      ;
+          ("f", po::value<std::string>(), "имя файла");
   po::variables_map map;
   try {
     po::store(po::parse_command_line(argc, argv, desc), map);
@@ -26,29 +25,29 @@ int ParseArgs(Program* _p, int argc, char **argv)
     BOOST_LOG_TRIVIAL(fatal) << "error: " << e.what();
     return EXIT_FAILURE;
   }
-  if(!map.count("f")) {
+  if (!map.count("f")) {
     BOOST_LOG_TRIVIAL(fatal) << "Not enough args";
     return EXIT_FAILURE;
   }
   _p->file_name = map["f"].as<std::string>();
-  if(map.count("M"))
-    _p->M=map["M"].as<unsigned int>();
+  if (map.count("M"))
+    _p->M = map["M"].as<unsigned int>();
   else
-    _p->M=std::thread::hardware_concurrency();
+    _p->M = std::thread::hardware_concurrency();
   return EXIT_SUCCESS;
 }
 void InitLogging(std::string logfile)
 {
   boost::filesystem::absolute("");
-  logging::add_file_log(logfile, logging::keywords::auto_flush = true );
+  logging::add_file_log(logfile, logging::keywords::auto_flush = true);
   logging::add_console_log(std::cout);
 }
 bool checkSHA(string sha) {
-  int N=4;
-  char c='0';
+  int N = 4;
+  char c = '0';
   size_t len = sha.length();
-  for(int i=0; i != N; i++)
-    if(sha[len-i-1] != c)
+  for(int i = 0; i != N; i++)
+    if (sha[len-i-1] != c)
       return false;
   return true;
 }
@@ -61,8 +60,9 @@ void task(unsigned int thread_id)
   while (!p->terminated) {
     auto word = rand.get();
     string hash = sha256(word);
-    BOOST_LOG_TRIVIAL(trace) << "thread "<< thread_id<<": "<< word<<" - "<< hash;
-    if(checkSHA(hash))
+    BOOST_LOG_TRIVIAL(trace) << "thread "
+                             << thread_id<<": " << word<<" - " << hash;
+    if (checkSHA(hash))
     {
       const auto p1 = std::chrono::system_clock::now();
         json j;

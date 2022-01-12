@@ -3,6 +3,7 @@
 #define LAB6_UTILS_H
 #include <exception>
 #include <iostream>
+#include <string>
 #include <unistd.h>
 #include <boost/program_options.hpp>
 #include <boost/log/core.hpp>
