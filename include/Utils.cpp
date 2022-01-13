@@ -46,7 +46,7 @@ bool checkSHA(string sha) {
   int N = 4;
   char c = '0';
   size_t len = sha.length();
-  for(int i = 0; i != N; i++)
+  for (int i = 0; i != N; i++)
     if (sha[len-i-1] != c)
       return false;
   return true;
@@ -61,7 +61,7 @@ void task(unsigned int thread_id)
     auto word = rand.get();
     string hash = sha256(word);
     BOOST_LOG_TRIVIAL(trace) << "thread "
-                             << thread_id<<": " << word<<" - " << hash;
+                             << thread_id << ": " << word << " - " << hash;
     if (checkSHA(hash))
     {
       const auto p1 = std::chrono::system_clock::now();
@@ -72,7 +72,7 @@ void task(unsigned int thread_id)
         j["data"] = word;
         _p->shas.push_back(j);
         BOOST_LOG_TRIVIAL(info) << "thread "<< thread_id
-                                << " FOUND! word: " << word << " hash: " << hash;
+        << " FOUND! word: " << word << " hash: " << hash;
     }
   }
 }

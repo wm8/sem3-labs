@@ -26,7 +26,7 @@ char* Randomizer::get()
       };
   std::mt19937 r(*seed);
   std::uniform_int_distribution<std::mt19937::result_type> dist(1, maxl);
-  std::uniform_int_distribution<std::mt19937::result_type> rand(0,cc-1);
+  std::uniform_int_distribution<std::mt19937::result_type> rand(0, cc-1);
   int l = dist(r);
   char* word = new char[l+1];
   for (int i = 0; i != l; i++) {

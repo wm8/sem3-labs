@@ -99,7 +99,8 @@ void SHA256::processBlock(const void* data)
   uint32_t h = m_hash[7];
 
   // data represented as 16x 32-bit words
-  const uint32_t* input = (uint32_t*)data;
+  const uint32_t* input = const_cast<uint32_t*>
+      (reinterpret_cast<const uint32_t*>(data));
   // convert to big endian
   uint32_t words[64];
   int i;
@@ -371,7 +372,8 @@ void SHA256::add(const void* data,  size_t numBytes)
 /// process final block,  less than 64 bytes
 void SHA256::processBuffer()
 {
-  // the input bytes are considered as bits strings,  where the first bit is the most significant bit of the byte
+  // the input bytes are considered as bits strings,
+  // where the first bit is the most significant bit of the byte
 
   // - append "1" bit to message
   // - append "0" bits until message length in bit mod 512 is 448

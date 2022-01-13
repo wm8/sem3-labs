@@ -1,7 +1,9 @@
 // Copyright (c) 2022 wm8
 #include <iostream>
+#include <signal.h>
 #include "Program.h"
 #include "Utils.h"
+
 int main(int argc, char** argv) {
   auto* _p= new Program();
   InitLogging();
