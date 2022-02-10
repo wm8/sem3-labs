@@ -88,7 +88,7 @@ template <typename T>
 Stack<T>::~Stack() {
   used = 0;
   size = 0;
-  delete (array);
+  free (array);
 }
 template <typename T>
 template <typename... Args>
