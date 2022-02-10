@@ -50,4 +50,5 @@ TEST(unit_test, stack_pointer)
   stack->push(t5);
   ASSERT_EQ(5, stack->head().id);
   delete(stack);
+  delete(t);
 }
