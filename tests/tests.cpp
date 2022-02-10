@@ -49,5 +49,5 @@ TEST(unit_test, stack_pointer)
   stack->push(t4);
   stack->push(t5);
   ASSERT_EQ(5, stack->head().id);
-  free(stack);
+  delete(stack);
 }
