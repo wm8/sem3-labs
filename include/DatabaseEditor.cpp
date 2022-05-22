@@ -106,8 +106,7 @@ std::vector<ColumnFamilyDescriptor>* DatabaseEditor::getTables
   auto* column_families = new std::vector<ColumnFamilyDescriptor>();
   auto* column_names = new std::vector<string>();
   Status s = DB::ListColumnFamilies(options, db_path, column_names);
-  if(!s.ok())
-  {
+  if (!s.ok()) {
     DB* db;
     DB::Open(options, db_path, &db);
     delete db;
