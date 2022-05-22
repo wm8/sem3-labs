@@ -1,4 +1,4 @@
-//Copyright 2022 wm8
+//Copyright 2022 vlados2003
 
 #include "Utils.h"
 #include <iomanip>
@@ -7,7 +7,7 @@
 bool ParseArgs(Data* data, int argc, char **argv) {
   po::options_description desc("Options:");
   desc.add_options()("log-level,ll", po::value<string>(),
-                     "уровень ллоггирования")(
+                     "уровень логгирования")(
       "thread-count,tc", po::value<unsigned int>(), "кол-во потоков")(
       "input", po::value<std::string>(), "входной файл")(
       "help", "this message")("output,o", po::value<string>(),
