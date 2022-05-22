@@ -1,4 +1,4 @@
-//Copyright 2022 wm8
+//Copyright 2022 vlados2003
 #include <vector>
 #include "Utils.h"
 bool ParseArgs(Data* data, int argc, char **argv) {
